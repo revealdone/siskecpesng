@@ -1,0 +1,19 @@
+php artisan make:model Laporan -m
+php artisan make:migration create_flights_table
+php artisan make:controller LaporanController
+laravel new asd-app
+php artisan make:migration create_archives_table
+php artisan make:model Archive
+php artisan make:controller ArchiveController
+php artisan make:controller DashboardController
+npm install --save-dev @types/dayjs
+npm install dayjs
+php artisan make:controller ArsipPegawaiController --resource
+php artisan make:model ArsipPegawai
+php artisan make:migration add_akte_kelahiran_suami_to_arsip_pegawais_table
+
+sk golongan ada banyak
+sertifikat diklat ada banyak
+sk jabatan ada banyak
+
+judul = jabatan/tempat tugas (tanggal menjabat, jadi ketauan sudah berapa lama)

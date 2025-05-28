@@ -1,0 +1,27 @@
+.partner-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    flex-direction: row;
+    overflow-x: auto;
+}
+
+.partner-logos a {
+    flex: 0 0 auto;
+    display: inline-block;
+}
+
+.partner-logos img {
+    height: 80px;
+    width: auto;
+    max-width: 100px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.partner-logos img:hover {
+    transform: scale(1.1);
+}
