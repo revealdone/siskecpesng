@@ -44,25 +44,6 @@ const form = useForm<PegawaiForm>({
     kartu_istri: null,
 });
 
-const fileFields = [
-    'sk_cpns',
-    'sk_pns',
-    'sk_golongan',
-    'sk_jabatan',
-    'buku_nikah',
-    'kartu_pegawai',
-    'kartu_istri',
-    'akte_suami',
-    'akte_istri',
-    'akte_anak_1',
-    'akte_anak_2',
-    'akte_anak_3',
-    'akte_anak_4',
-    'akte_anak_5',
-] as const;
-
-type FileField = (typeof fileFields)[number];
-
 function handleFileChange(e: Event, field: keyof PegawaiForm) {
     const target = e.target as HTMLInputElement;
     if (target?.files?.[0]) {
@@ -77,9 +58,26 @@ function submit() {
     payload.append('nama', form.nama);
     payload.append('lokasi_rak', form.lokasi_rak);
 
+    const fileFields: (keyof PegawaiForm)[] = [
+        'sk_cpns',
+        'sk_pns',
+        'sk_golongan',
+        'sk_jabatan',
+        'buku_nikah',
+        'kartu_pegawai',
+        'kartu_istri',
+        'akte_suami',
+        'akte_istri',
+        'akte_anak_1',
+        'akte_anak_2',
+        'akte_anak_3',
+        'akte_anak_4',
+        'akte_anak_5',
+    ];
+
     fileFields.forEach((field) => {
-        if (form[field as keyof PegawaiForm]) {
-            payload.append(field, form[field as keyof PegawaiForm] as Blob);
+        if (form[field]) {
+            payload.append(field, form[field] as Blob);
         }
     });
 
@@ -87,6 +85,13 @@ function submit() {
         forceFormData: true,
         preserveScroll: true,
     });
+
+    // form.post(`/arsip-pegawai/${props.pegawai.id}`, {
+    //   method: 'put', // atau 'patch'
+    //   forceFormData: true,
+    //   preserveScroll: true,
+    //   // data: payload,
+    // });
 }
 </script>
 
@@ -105,17 +110,24 @@ function submit() {
                 <input v-model="form.lokasi_rak" type="text" placeholder="Lokasi Rak" class="w-full rounded border px-3 py-2" />
 
                 <div class="grid grid-cols-2 gap-4">
-                    <div v-for="field in fileFields.slice(0, 7)" :key="field">
+                    <div
+                        v-for="field in ['sk_cpns', 'sk_pns', 'sk_golongan', 'sk_jabatan', 'buku_nikah', 'kartu_pegawai', 'kartu_istri']"
+                        :key="field"
+                    >
                         <label class="block text-sm capitalize">{{ field.replace('_', ' ') }}</label>
-                        <input type="file" @change="(e) => handleFileChange(e, field)" />
+                        <input type="file" @change="(e) => handleFileChange(e, field as keyof PegawaiForm)" />
                         <div v-if="props.pegawai[field]" class="mt-1 text-xs text-gray-500">
                             <a :href="`/storage/${props.pegawai[field]}`" target="_blank" class="text-blue-500 underline">Lihat File Lama</a>
                         </div>
                     </div>
 
-                    <div v-for="field in fileFields.slice(7)" :key="field">
+                    <!-- Akte -->
+                    <div
+                        v-for="field in ['akte_suami', 'akte_istri', 'akte_anak_1', 'akte_anak_2', 'akte_anak_3', 'akte_anak_4', 'akte_anak_5']"
+                        :key="field"
+                    >
                         <label class="block text-sm capitalize">{{ field.replace('_', ' ') }}</label>
-                        <input type="file" @change="(e) => handleFileChange(e, field)" />
+                        <input type="file" @change="(e) => handleFileChange(e, field as keyof PegawaiForm)" />
                         <div v-if="props.pegawai[field]" class="mt-1 text-xs text-gray-500">
                             <a :href="`/storage/${props.pegawai[field]}`" target="_blank" class="text-blue-500 underline">Lihat File Lama</a>
                         </div>

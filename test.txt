@@ -11,6 +11,9 @@ npm install dayjs
 php artisan make:controller ArsipPegawaiController --resource
 php artisan make:model ArsipPegawai
 php artisan make:migration add_akte_kelahiran_suami_to_arsip_pegawais_table
+npm install @inertiajs/vue3
+php artisan storage:link
+
 
 sk golongan ada banyak
 sertifikat diklat ada banyak

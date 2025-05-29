@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { Head, Link } from '@inertiajs/vue3';
 import { type BreadcrumbItem } from '@/types';
+import { Head, Link } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 
 const props = defineProps<{
@@ -24,20 +24,10 @@ const breadcrumbs: BreadcrumbItem[] = [
     <Head title="Dashboard" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex flex-1 flex-col gap-4 rounded-xl p-4">
-<div class="flex items-center gap-2">
-    <Link
-        href="/archives/create"
-        class="bg-blue-600 text-white px-3 py-1.5 text-sm rounded hover:bg-blue-700"
-    >
-        + Tambah Arsip
-    </Link>
-    <Link
-        href="/archives"
-        class="bg-gray-200 text-gray-800 px-3 py-1.5 text-sm rounded hover:bg-gray-300"
-    >
-        🔍 Lihat / Cari Arsip
-    </Link>
-</div>
+            <div class="flex items-center gap-2">
+                <Link href="/archives/create" class="rounded bg-blue-600 px-3 py-1.5 text-sm text-white hover:bg-blue-700"> + Tambah Arsip </Link>
+                <Link href="/archives" class="rounded bg-gray-200 px-3 py-1.5 text-sm text-gray-800 hover:bg-gray-300"> 🔍 Lihat / Cari Arsip </Link>
+            </div>
             <div class="grid auto-rows-min gap-4 md:grid-cols-3">
                 <div class="rounded-xl bg-white p-4 shadow dark:bg-gray-800">
                     <h3 class="text-sm text-gray-500">Total Arsip</h3>
@@ -67,10 +57,10 @@ const breadcrumbs: BreadcrumbItem[] = [
   </div>
 </div> -->
 
-            <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+            <div class="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 rounded-xl border">
                 <p class="p-6 text-gray-500 dark:text-gray-300">Selamat datang di dashboard arsip.</p>
             </div>
-            <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
+            <div class="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 rounded-xl border">
                 <PlaceholderPattern />
             </div>
         </div>
