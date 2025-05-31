@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import { computed, ref } from 'vue';
 
 const props = defineProps<{
-    archives: {
+    archives2: {
         id: number;
         title: string;
         physical_location: string;
@@ -16,10 +16,10 @@ const props = defineProps<{
 
 const search = ref('');
 
-const filteredArchives = computed(() => {
-    return props.archives.filter(
-        (archive) =>
-            archive.title.toLowerCase().includes(search.value.toLowerCase()) || archive.pdf_path.toLowerCase().includes(search.value.toLowerCase()),
+const filteredArchives2 = computed(() => {
+    return props.archives2.filter(
+        (archive2) =>
+            archive2.title.toLowerCase().includes(search.value.toLowerCase()) || archive2.pdf_path.toLowerCase().includes(search.value.toLowerCase()),
     );
 });
 
@@ -27,9 +27,9 @@ const isExpired = (date: string) => {
     return dayjs().diff(dayjs(date), 'year') >= 2;
 };
 
-const deleteArchive = (id: number) => {
+const deleteArchive2 = (id: number) => {
     if (confirm('Yakin ingin menghapus arsip ini?')) {
-        router.delete(`/archives/${id}`);
+        router.delete(`/archives2/${id}`);
     }
 };
 </script>
@@ -58,7 +58,7 @@ const deleteArchive = (id: number) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="a in filteredArchives" :key="a.id" class="border-t">
+                        <tr v-for="a in filteredArchives2" :key="a.id" class="border-t">
                             <td class="px-4 py-2">{{ a.title }}</td>
                             <td class="px-4 py-2">{{ a.physical_location }}</td>
                             <td class="px-4 py-2">{{ dayjs(a.stored_at).format('DD MMM YYYY') }}</td>
@@ -68,7 +68,7 @@ const deleteArchive = (id: number) => {
                             </td>
                             <td class="px-4 py-2 text-center">
                                 <a :href="`/storage/${a.pdf_path}`" target="_blank" class="mr-2 text-blue-600 underline">Lihat</a>
-                                <button @click="deleteArchive(a.id)" class="text-red-600 underline">Hapus</button>
+                                <button @click="deleteArchive2(a.id)" class="text-red-600 underline">Hapus</button>
                             </td>
                         </tr>
                     </tbody>

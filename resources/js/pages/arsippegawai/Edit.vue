@@ -7,7 +7,10 @@ const props = defineProps<{ pegawai: any }>();
 type PegawaiForm = {
     nrk: string;
     nama: string;
+    jabatan: string;
+    tempattugas: string;
     lokasi_rak: string;
+    keterangan: string;
     sk_cpns: File | null;
     sk_pns: File | null;
     sk_golongan: File | null;
@@ -28,6 +31,9 @@ const form = useForm<PegawaiForm>({
     nrk: props.pegawai.nrk,
     nama: props.pegawai.nama,
     lokasi_rak: props.pegawai.lokasi_rak,
+    jabatan: props.pegawai.jabatan,
+    tempattugas: props.pegawai.tempattugas,
+    keterangan: props.pegawai.keterangan,
     sk_cpns: null,
     sk_pns: null,
     sk_golongan: null,
@@ -45,6 +51,7 @@ const form = useForm<PegawaiForm>({
 });
 
 const fileFields = [
+    // 'jabatan',
     'sk_cpns',
     'sk_pns',
     'sk_golongan',
@@ -75,7 +82,10 @@ function submit() {
     payload.append('_method', 'PUT');
     payload.append('nrk', form.nrk);
     payload.append('nama', form.nama);
+    payload.append('jabatan', form.jabatan);
+    payload.append('tempattugas', form.tempattugas);
     payload.append('lokasi_rak', form.lokasi_rak);
+    payload.append('keterangan', form.keterangan);
 
     fileFields.forEach((field) => {
         if (form[field as keyof PegawaiForm]) {
@@ -100,9 +110,18 @@ function submit() {
             </div>
 
             <form @submit.prevent="submit" class="space-y-4">
+                <p class="bg-gray500 px-3 text-sm font-bold">1.NRK</p>
                 <input v-model="form.nrk" type="text" placeholder="NRK" class="w-full rounded border px-3 py-2" />
+                <p class="bg-gray500 px-3 text-sm font-bold">2.NAMA</p>
                 <input v-model="form.nama" type="text" placeholder="Nama" class="w-full rounded border px-3 py-2" />
+                <p class="bg-gray500 px-3 text-sm font-bold">3.Jabatan/Tanggal Awal Menjabat (02/05/2025)</p>
+                <input v-model="form.jabatan" type="text" placeholder="Jabatan & Tanggal Awal Menjabat" class="w-full rounded border px-3 py-2" />
+                <p class="bg-gray500 px-3 text-sm font-bold">4.Lokasi Rak</p>
                 <input v-model="form.lokasi_rak" type="text" placeholder="Lokasi Rak" class="w-full rounded border px-3 py-2" />
+                <p class="bg-gray500 px-3 text-sm font-bold">5.Tempat Tugas</p>
+                <input v-model="form.tempattugas" type="text" placeholder="Contoh(Kelurahan Ulujami)" class="w-full rounded border px-3 py-2" />
+                <p class="bg-gray500 px-3 text-sm font-bold">6.keterangan</p>
+                <input v-model="form.keterangan" type="text" placeholder="keterangan" class="w-full rounded border px-3 py-2" />
 
                 <div class="grid grid-cols-2 gap-4">
                     <div v-for="field in fileFields.slice(0, 7)" :key="field">

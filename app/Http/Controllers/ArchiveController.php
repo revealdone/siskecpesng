@@ -21,7 +21,10 @@ class ArchiveController extends Controller
 public function destroy(Archive $archive)
 {
     // Hapus file fisik jika ada
-    if (Storage::disk('public')->exists($archive->pdf_path)) {
+    // if (Storage::disk('public')->exists($archive->pdf_path)) {
+    //     Storage::disk('public')->delete($archive->pdf_path);
+    // }
+        if ($archive->pdf_path && Storage::disk('public')->exists($archive->pdf_path)) {
         Storage::disk('public')->delete($archive->pdf_path);
     }
 

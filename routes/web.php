@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ArchiveController;
+use App\Http\Controllers\ArchiveController1;
+use App\Http\Controllers\ArchiveController2;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ArsipPegawaiController;
 
@@ -29,6 +31,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/archives/create', function () {
         return Inertia::render('archives/Create');
     })->name('archives.create');
+
+    // sk jabatan 1
+    Route::get('/archives1', [ArchiveController1::class, 'index'])->name('archives1.index');
+    Route::post('/archives1', [ArchiveController1::class, 'store'])->name('archives1.store');
+    Route::delete('/archives1/{archive1}', [ArchiveController1::class, 'destroy'])->name('archives1.destroy');
+    Route::delete('/archives1/{archive1}', [ArchiveController1::class, 'destroy']);
+
+    Route::get('/archives1/create', function () {
+        return Inertia::render('archives1/Create');
+    })->name('archives1.create');
+
+    // sertifikat diklat
+    Route::get('/archives2', [ArchiveController2::class, 'index'])->name('archives2.index');
+    Route::post('/archives2', [ArchiveController2::class, 'store'])->name('archives2.store');
+    Route::delete('/archives2/{archive2}', [ArchiveController2::class, 'destroy'])->name('archives2.destroy');
+    Route::delete('/archives2/{archive2}', [ArchiveController2::class, 'destroy']);
+
+    Route::get('/archives2/create', function () {
+        return Inertia::render('archives2/Create');
+    })->name('archives2.create');
 });
 
 

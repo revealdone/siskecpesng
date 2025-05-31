@@ -5,11 +5,14 @@ import { Head, useForm } from '@inertiajs/vue3';
 type PegawaiForm = {
     nrk: string;
     nama: string;
+    jabatan: string;
+    tempattugas: string;
     lokasi_rak: string;
+    keterangan: string;
     sk_cpns: File | null;
     sk_pns: File | null;
     sk_golongan: File | null;
-    sk_jabatan: File | null;
+    // sk_jabatan: File | null;
     buku_nikah: File | null;
     akte_suami: File | null;
     akte_istri: File | null;
@@ -25,11 +28,14 @@ type PegawaiForm = {
 const form = useForm<PegawaiForm>({
     nrk: '',
     nama: '',
+    jabatan: '',
+    tempattugas: '',
+    keterangan: '',
     lokasi_rak: '',
     sk_cpns: null,
     sk_pns: null,
     sk_golongan: null,
-    sk_jabatan: null,
+    // sk_jabatan: null,
     buku_nikah: null,
     akte_suami: null,
     akte_istri: null,
@@ -59,12 +65,16 @@ function submit() {
     payload.append('nrk', form.nrk);
     payload.append('nama', form.nama);
     payload.append('lokasi_rak', form.lokasi_rak);
+    payload.append('jabatan', form.jabatan);
+    payload.append('tempattugas', form.tempattugas);
+    payload.append('keterangan', form.keterangan);
 
     const fileFields: (keyof PegawaiForm)[] = [
         'sk_cpns',
         'sk_pns',
+        // 'jabatan',
         'sk_golongan',
-        'sk_jabatan',
+        // 'sk_jabatan',
         'buku_nikah',
         'kartu_pegawai',
         'kartu_istri',
@@ -97,14 +107,29 @@ function submit() {
     <Head title="Tambah Arsip Pegawai" />
     <AppLayout>
         <form @submit.prevent="submit" class="space-y-4 rounded bg-white p-6 shadow">
-            <h2 class="text-lg font-bold">Tambah Arsip Pegawai</h2>
-
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-bold">Tambah Arsip Pegawai</h2>
+                <a href="/arsip-pegawai" class="text-sm text-gray-600 hover:underline">⬅️ Kembali</a>
+            </div>
             <input v-model="form.nrk" type="text" placeholder="NRK" class="w-full rounded border px-3 py-2" />
             <input v-model="form.nama" type="text" placeholder="Nama" class="w-full rounded border px-3 py-2" />
+            <input
+                v-model="form.jabatan"
+                type="text"
+                placeholder="Jabatan/Tanggal Awal Menjabat (Kasubbag Umum / 02/02/2025)"
+                class="w-full rounded border px-3 py-2"
+            />
+            <input
+                v-model="form.tempattugas"
+                type="text"
+                placeholder="Tempat Tugas / Contoh(Kelurahan Ulujami)"
+                class="w-full rounded border px-3 py-2"
+            />
             <input v-model="form.lokasi_rak" type="text" placeholder="Lokasi Rak" class="w-full rounded border px-3 py-2" />
+            <!-- <input v-model="form.keterangan" type="text" placeholder="keterangan" class="w-full rounded border px-3 py-2" /> -->
 
             <div class="grid grid-cols-2 gap-4">
-                <div v-for="field in ['sk_cpns', 'sk_pns', 'sk_golongan', 'sk_jabatan', 'buku_nikah', 'kartu_pegawai', 'kartu_istri']" :key="field">
+                <div v-for="field in ['sk_cpns', 'sk_pns', 'sk_golongan', 'buku_nikah', 'kartu_pegawai', 'kartu_istri']" :key="field">
                     <label class="block text-sm capitalize">{{ field.replace('_', ' ') }}</label>
                     <input type="file" @change="(e) => handleFileChange(e, field as keyof PegawaiForm)" />
                 </div>
@@ -120,6 +145,17 @@ function submit() {
                     <label class="block text-sm">Akte Kelahiran Istri</label>
                     <input type="file" @change="(e) => handleFileChange(e, 'akte_istri')" />
                 </div>
+                <!-- <div>
+                    <label class="block text-sm">Sk Jabatan</label>
+                    <input v-model="form.keterangan" type="text" placeholder="keterangan" class="w-full rounded border px-3 py-2" />
+                    <input type="file" @change="(e) => handleFileChange(e, 'sk_jabatan')" />
+                    <input v-model="form.keterangan" type="text" placeholder="keterangan" class="w-full rounded border px-3 py-2" />
+                    <input type="file" @change="(e) => handleFileChange(e, 'sk_jabatan')" />
+                    <input v-model="form.keterangan" type="text" placeholder="keterangan" class="w-full rounded border px-3 py-2" />
+                    <input type="file" @change="(e) => handleFileChange(e, 'sk_jabatan')" />
+                    <input v-model="form.keterangan" type="text" placeholder="keterangan" class="w-full rounded border px-3 py-2" />
+                    <input type="file" @change="(e) => handleFileChange(e, 'sk_jabatan')" />
+                </div> -->
                 <div>
                     <label class="block text-sm">Akte Kelahiran Anak 1</label>
                     <input type="file" @change="(e) => handleFileChange(e, 'akte_anak_1')" />
