@@ -27,6 +27,12 @@ php artisan make:migration create_archives2_table
         $table->string('pdf_path');
         $table->date('stored_at'); // tanggal arsip disimpan
         $table->timestamps();
+download ngrok 
+ngrok
+ngrok config add-authtoken 
+ngrok http 8000
+VITE_DEV_SERVER_URL=https://vite-abc123.ngrok-free.app
+ngrok start --all
 
 
 sk golongan ada banyak

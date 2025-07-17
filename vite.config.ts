@@ -12,6 +12,7 @@ export default defineConfig({
             ssr: 'resources/js/ssr.ts',
             refresh: true,
         }),
+        
         tailwindcss(),
         vue({
             template: {
@@ -28,4 +29,12 @@ export default defineConfig({
             'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
         },
     },
+    server: {
+        host: true,
+  cors: true,
+  allowedHosts: ['.ngrok-free.app'], // atau bisa spesifik: ['7a8c96dc424f.ngrok-free.app']
+  hmr: {
+    host: '7a8c96dc424f.ngrok-free.app',
+    protocol: 'wss',
+    },},
 });
