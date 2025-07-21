@@ -33,6 +33,13 @@ ngrok config add-authtoken
 ngrok http 8000
 VITE_DEV_SERVER_URL=https://vite-abc123.ngrok-free.app
 ngrok start --all
+download ngrok 
+ngrok
+ngrok config add-authtoken 
+ngrok http 8000
+VITE_DEV_SERVER_URL=https://vite-abc123.ngrok-free.app
+ngrok start --all --config H:\ngrok2\ngrok.yml
+
 
 
 sk golongan ada banyak
