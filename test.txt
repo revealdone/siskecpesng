@@ -17,6 +17,9 @@ php artisan make:migration add_sk_jabatan_1_to_arsip_pegawais_table
 npm install @inertiajs/vue3
 php artisan storage:link
 composer install
+npm install
+touch .env
+
 xampp
 nodejs
 php artisan make:migration create_archives1_table
